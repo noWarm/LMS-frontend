@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Login from './Login';
+import NewCourseForm from './NewCourseForm';
 import Register from './Register';
 
 function App() {
@@ -85,15 +86,17 @@ function App() {
     // clear accesstoken from the localstorage client side
     setToken(null);
     navigate('/login')
-};
+  };
 
+  
 
   return (
     <Routes>
       <Route index element = {<Login token={token} handleLogin={handleLogin} handleLogout={handleLogout}/>} />
-      <Route path="register" element={<Register handleRegister={handleRegister} token={token} handleLogout={handleLogout}/>} />
-      <Route path="login" element={<Login token={token} handleLogin={handleLogin} handleLogout={handleLogout}/>} />
-      <Route path="dashboard" element={<Dashboard token={token} handleLogout={handleLogout}/>} />
+      <Route path="/register" element={<Register handleRegister={handleRegister} token={token} handleLogout={handleLogout}/>} />
+      <Route path="/login" element={<Login token={token} handleLogin={handleLogin} handleLogout={handleLogout}/>} />
+      <Route path="/dashboard" element={<Dashboard token={token} handleLogout={handleLogout}/>} />
+      <Route path="/courses/new" element={<NewCourseForm token={token} handleLogout={handleLogout}/>} />
     </Routes>
   );
 }
