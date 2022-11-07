@@ -4,7 +4,6 @@ import Header from "./Header";
 
 function Dashboard({ token, handleLogout }) {
     const [isLoading, setIsLoading] = useState(false);
-    const [username, setUsername] = useState(null);
     const [isStudent, setIsStudent] = useState(null);
     const [learningCourses, setLearningCourses] = useState([]);
     const [teachingCourses, setTeachingCourses] = useState([]);
@@ -23,7 +22,6 @@ function Dashboard({ token, handleLogout }) {
             console.log(response_data.message);
             console.log(response_data.data);
             
-            setUsername(response_data.data.user.name);
             setIsStudent(response_data.data.isStudent);
             
             if (response_data.data.isStudent) {
@@ -45,7 +43,7 @@ function Dashboard({ token, handleLogout }) {
 
     return(
         <>
-            <Header token={token} handleLogout={handleLogout} username={username}/>
+            <Header token={token} handleLogout={handleLogout}/>
             <h1>Dashboard</h1>
 
             <h2>Your Courses</h2>
@@ -54,6 +52,15 @@ function Dashboard({ token, handleLogout }) {
                     learningCourses.map(item => (
                         <li>
                             <a>{item.name}</a>
+                        </li>
+                    ))
+                }
+            </ul>
+            <ul>
+                {
+                    teachingCourses.map(item => (
+                        <li key={item.id}>
+                            <NavLink to={`/courses/${item.id}`}>{item.name}</NavLink>
                         </li>
                     ))
                 }
