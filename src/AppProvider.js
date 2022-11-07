@@ -1,8 +1,18 @@
+import { useState, createContext } from "react";
 
-const AppProvider = () => {
+export const AppContext = createContext(null);
+
+const AppProvider = ({ children }) => {
+    const [token, setToken] = useState(null);
+
+    const value = {
+        token: [token, setToken],
+    }
+
     return (
-        <>
-        </>
+        <AppContext.Provider value={value}>
+            {children}
+        </AppContext.Provider>
     );
 };
 

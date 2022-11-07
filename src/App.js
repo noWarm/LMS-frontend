@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { AppContext } from './AppProvider';
 import Dashboard from './Dashboard';
 import Login from './Login';
 import NewCourseForm from './NewCourseForm';
@@ -7,7 +8,7 @@ import Register from './Register';
 
 function App() {
 
-  const [token, setToken] = useState(null);
+  const { ["token"] : [token, setToken] } = useContext(AppContext);
   const navigate = useNavigate();
 
   /*
