@@ -6,6 +6,7 @@ import Dashboard from './Dashboard';
 import Login from './Login';
 import NewCourse from './NewCourse';
 import NewMaterial from './NewMaterial';
+import ProtectedRoutes from './ProtectedRoutes';
 import Register from './Register';
 
 function App() {
@@ -106,15 +107,16 @@ function App() {
       <Route index element = {<Login token={token} handleLogin={handleLogin} handleLogout={handleLogout}/>} />
       <Route path="register" element={<Register handleRegister={handleRegister} token={token} handleLogout={handleLogout}/>} />
       <Route path="login" element={<Login token={token} handleLogin={handleLogin} handleLogout={handleLogout}/>} />
-      <Route path="dashboard" element={<Dashboard token={token} handleLogout={handleLogout}/>} />
+      
+      <Route path="dashboard" element={<ProtectedRoutes><Dashboard token={token} handleLogout={handleLogout}/></ProtectedRoutes>} />
       <Route path="courses">
-        <Route path="new" element={<NewCourse handleLogout={handleLogout}/>} />
-        <Route path=":courseId" element={<CoursePage handleLogout={handleLogout}/>}>
+        <Route path="new" element={<ProtectedRoutes><NewCourse handleLogout={handleLogout}/></ProtectedRoutes>} />
+        <Route path=":courseId" element={<ProtectedRoutes><CoursePage handleLogout={handleLogout}/></ProtectedRoutes>}>
         </Route>
       </Route>
 
       <Route path="courses/:courseId/materials">
-        <Route path="new" element={<NewMaterial handleLogout={handleLogout}/>} />
+        <Route path="new" element={<ProtectedRoutes><NewMaterial handleLogout={handleLogout}/></ProtectedRoutes>} />
         {/* <Route path=":materialId" element={<MaterialPage handleLogout={handleLogout}/>} /> */}
       </Route>
     </Routes>
