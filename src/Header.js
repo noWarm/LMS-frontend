@@ -3,16 +3,16 @@ import { AppContext } from "./AppProvider";
 import Navigator from "./Navigator";
 import SmallProfile from "./SmallProfile";
 
-function Header({handleLogout }) {
+function Header() {
     const { 
         ["token"] : [token, setToken],
+        ["handleLogout"] : handleLogout,
       } = useContext(AppContext);
 
     return (
         <>
             Header
-            <Navigator handleLogout={handleLogout} token={token}/>
-
+            <Navigator/>
             {( token && <SmallProfile/> )}
         </>
     );

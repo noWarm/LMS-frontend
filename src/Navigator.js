@@ -3,9 +3,10 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom"
 import { AppContext } from "./AppProvider";
 
-const Navigator = ({ handleLogout }) => {
+const Navigator = () => {
     const { 
         ["token"] : [token, setToken],
+        ["handleLogout"] : handleLogout,
       } = useContext(AppContext);
     return (
         <nav>

@@ -3,36 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "./AppProvider";
 import Header from "./Header";
 
-const NewCourse = ({handleLogout}) => {
-    const { ["token"] : [token, setToken] } = useContext(AppContext);
+const NewCourse = () => {
+    const { 
+        ["token"] : [token, setToken],
+        ["handleCreateCourse"] : handleCreateCourse,
+    } = useContext(AppContext);
+
     const [courseInfo, setCourseInfo] = useState({
         name: "",
         description: "",
         password: "",
     });
-    console.log(`token from NewCourse is ${token}`);
-    const navigate = useNavigate();
-
-    const handleCreateCourse = async (courseInfo) => {
-        try {
-    
-            const response = await fetch('http://127.0.0.1:8000/api/courses', {
-                method: 'POST',
-                headers: new Headers({
-                    'Authorization': 'Bearer ' + token,
-                    'Content-Type': 'application/json',
-                 }),
-                body: JSON.stringify(courseInfo),
-            });
-            
-            const responseData = await response.json();
-            console.log(responseData);
-            navigate('/dashboard');
-    
-        } catch (e) {
-            console.error(e);
-        }
-      };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -45,7 +26,7 @@ const NewCourse = ({handleLogout}) => {
 
     return (
         <>
-            <Header handleLogout={handleLogout}/>
+            <Header/>
             <h1>New Course Form</h1>
 
             <form onSubmit={handleSubmit}>
@@ -63,8 +44,6 @@ const NewCourse = ({handleLogout}) => {
                 </label>
                 <input type="submit" value="Create" />
             </form>
-
-
         </>
     );
 };

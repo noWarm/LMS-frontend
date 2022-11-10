@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "./AppProvider";
 import Header from "./Header";
 
-function Register({token, handleRegister, handleLogout}) {
+function Register() {
+    const { 
+        ["handleRegister"] : handleRegister,
+      } = useContext(AppContext);
+
     const [credentials, setCredentials] = useState({
         name: "",
         email: "",
@@ -20,7 +25,7 @@ function Register({token, handleRegister, handleLogout}) {
 
     return(
         <>
-            <Header token={token} handleLogout={handleLogout}/>
+            <Header/>
             <h1>Register</h1>
 
             <form onSubmit={handleSubmit}>

@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "./AppProvider";
+import CourseList from "./CourseList";
 import Header from "./Header";
 
-function Dashboard({ token, handleLogout }) {
+function Dashboard() {
     const [isLoading, setIsLoading] = useState(false);
     const [isStudent, setIsStudent] = useState(null);
     const [learningCourses, setLearningCourses] = useState([]);
     const [teachingCourses, setTeachingCourses] = useState([]);
+
+    const { 
+        ["token"] : [token, setToken],
+      } = useContext(AppContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,37 +41,17 @@ function Dashboard({ token, handleLogout }) {
         fetchData();
     }, []);
 
-    if (isLoading) {
-        return (
-            <>Loading ...</>
-        );
-    }
-
     return(
         <>
-            <Header token={token} handleLogout={handleLogout}/>
+            <Header/>
             <h1>Dashboard</h1>
-
             <h2>Your Courses</h2>
-            <ul>
-                {
-                    learningCourses.map(item => (
-                        <li>
-                            <a>{item.name}</a>
-                        </li>
-                    ))
-                }
-            </ul>
-            <ul>
-                {
-                    teachingCourses.map(item => (
-                        <li key={item.id}>
-                            <NavLink to={`/courses/${item.id}`}>{item.name}</NavLink>
-                        </li>
-                    ))
-                }
-            </ul>
-            <NavLink to="/courses/new">New Course</NavLink>
+            {
+                isLoading ? (<>Loading ...</>) :
+                <CourseList learningCourses={learningCourses} teachingCourses={teachingCourses} />
+            }
+            
+            <NavLink to="/courses/new">Add New Course</NavLink>
         </>
     );
 }

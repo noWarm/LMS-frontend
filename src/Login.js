@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "./AppProvider";
 import Header from "./Header";
 
-function Login({  token, handleLogin }) {
+function Login() {
+    const {
+        ["handleLogin"] : handleLogin
+    } = useContext(AppContext);
+
     const [credentials, setCredentials] = useState({
         email: "",
         password: "",

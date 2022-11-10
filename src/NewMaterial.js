@@ -1,17 +1,20 @@
 import { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { AppContext } from "./AppProvider";
 import Header from "./Header";
 
-const NewMaterial = ({handleLogout}) => {;
+const NewMaterial = () => {;
     const { courseId } = useParams();
 
-    const { ["token"] : [token, setToken] } = useContext(AppContext);
+    const { 
+        ["token"] : [token, setToken],
+        ["handleCreateMaterial"] : handleCreateMaterial,
+    } = useContext(AppContext);
+
     const [materialInfo, setMaterialInfo] = useState({
         name: "",
         description: "",
     });
-
     const [selectedFile, setSelectedFile] = useState();
     const [isUploaded, setIsUploaded] = useState(false);
 
@@ -20,37 +23,9 @@ const NewMaterial = ({handleLogout}) => {;
         setIsUploaded(true);
     }
 
-    const navigate = useNavigate();
-
-    const handleCreateMaterial = async (materialInfo) => {
-
-        const formData = new FormData();
-        formData.append('name', materialInfo.name);
-        formData.append('description', materialInfo.description);
-        formData.append('materialFile', selectedFile);
-
-        try {
-    
-            const response = await fetch(`http://127.0.0.1:8000/api/courses/${courseId}/materials`, {
-                method: 'POST',
-                headers: new Headers({
-                    'Authorization': 'Bearer ' + token,
-                 }),
-                body: formData,
-            });
-            
-            const responseData = await response.json();
-            console.log(responseData);
-            navigate(`/courses/${courseId}`);
-    
-        } catch (e) {
-            console.error(e);
-        }
-      };
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        await handleCreateMaterial(materialInfo);
+        await handleCreateMaterial(materialInfo, selectedFile, courseId);
     }
 
     const handleChange = (event) => {
@@ -59,7 +34,7 @@ const NewMaterial = ({handleLogout}) => {;
 
     return (
         <>
-            <Header handleLogout={handleLogout}/>
+            <Header/>
             <h1>New Material Form</h1>
 
             <form onSubmit={handleSubmit}>
