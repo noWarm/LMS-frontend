@@ -3,9 +3,7 @@ import { AppContext } from "./AppProvider";
 import Header from "./Header";
 
 function Register() {
-    const { 
-        ["handleRegister"] : handleRegister,
-      } = useContext(AppContext);
+    const { handleRegister } = useContext(AppContext);
 
     const [credentials, setCredentials] = useState({
         name: "",

@@ -1,6 +1,4 @@
-import { useContext, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { AppContext } from './AppProvider';
+import { Routes, Route } from 'react-router-dom';
 import CoursePage from './CoursePage';
 import Dashboard from './Dashboard';
 import Login from './Login';

@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Navigate, NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { AppContext } from "./AppProvider";
 import Header from "./Header";
 import axios from 'axios';
 import MaterialList from "./MaterialList";
-// import download from 'downloadjs';
 
 const CoursePage = () => {
     const { courseId } = useParams();
