@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext(null);
@@ -8,8 +8,17 @@ const AppProvider = ({ children }) => {
 
     const API_URL = 'http://127.0.0.1:8000/api/';
 
-    const [token, setToken] = useState(null);
-    const [username, setUsername] = useState(null);
+    const [token, setToken] = useState(
+        localStorage.getItem('token') || null
+    );
+    const [username, setUsername] = useState(
+        localStorage.getItem('username') || null
+    );
+
+    useEffect(() => {
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', username);
+    }, [token, username]);
 
     /*
     * handleRegister will 
