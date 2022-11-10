@@ -6,9 +6,10 @@ export const AppContext = createContext(null);
 const AppProvider = ({ children }) => {
     const navigate = useNavigate();
 
+    const API_URL = 'http://127.0.0.1:8000/api/';
+
     const [token, setToken] = useState(null);
     const [username, setUsername] = useState(null);
-
 
     /*
     * handleRegister will 
@@ -18,7 +19,7 @@ const AppProvider = ({ children }) => {
     const handleRegister = async (credentials) => {
         try {
 
-            const response = await fetch('http://127.0.0.1:8000/api/auth/register', {
+            const response = await fetch(API_URL+"auth/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,7 +46,7 @@ const AppProvider = ({ children }) => {
     */
     const handleLogin = async (credentials) => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/auth/login', {
+            const response = await fetch(API_URL + "auth/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ const AppProvider = ({ children }) => {
     */
     const handleLogout = async () => {
         // revoke accessToken on the serverside
-        const res = await fetch('http://127.0.0.1:8000/api/logout',{
+        const res = await fetch(API_URL + "logout", {
             method: 'GET',
             headers: new Headers({
                 'Authorization': 'Bearer ' + token
@@ -101,7 +102,7 @@ const AppProvider = ({ children }) => {
     const handleCreateCourse = async (courseInfo) => {
         try {
     
-            const response = await fetch('http://127.0.0.1:8000/api/courses', {
+            const response = await fetch(API_URL + "course", {
                 method: 'POST',
                 headers: new Headers({
                     'Authorization': 'Bearer ' + token,
@@ -133,7 +134,7 @@ const AppProvider = ({ children }) => {
         formData.append('materialFile', selectedFile);
 
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/courses/${courseId}/materials`, {
+            const response = await fetch(API_URL + "courses/" + `${courseId}/materials`, {
                 method: 'POST',
                 headers: new Headers({
                     'Authorization': 'Bearer ' + token,
