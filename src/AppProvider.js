@@ -175,8 +175,6 @@ const AppProvider = ({ children }) => {
         {children}
     </AppContext.Provider>
     );
-
-    
 };
 
 export { AppProvider };
