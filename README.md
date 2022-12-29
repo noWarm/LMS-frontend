@@ -29,3 +29,12 @@ Managing between **RUSHING** to learn and understand the Web technologies to mak
 - learnt to read documents and asked for help
 
 For a detailed journaling of the process and lessons learnt please check out this [medium article-THAI](https://shorturl.at/cikW6)
+
+# This project was bootstrapped with Create React App.
+
+To start the program, in the project directory
+- `npm start` 
+
+Also make sure that the [backend server](https://github.com/noWarm/LMS-backend) is running
+- if you're using Xampp, start Apache & mySql server
+- `php artisan serve`
