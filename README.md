@@ -28,4 +28,4 @@ Managing between **RUSHING** to learn and understand the Web technologies to mak
 - choose tools based on pros/cons matrix instead of gut feeling/trends
 - learnt to read documents and asked for help
 
-For a detailed journaling of the process and lessons learnt please check out this [medium article-THAI](shorturl.at/cikW6)
+For a detailed journaling of the process and lessons learnt please check out this [medium article-THAI](https://shorturl.at/cikW6)
